@@ -12,6 +12,7 @@ int main(int argc, char* argv[])
   while (game.isRunning())
   {
     game.handleEvents();
+    game.update();
     game.draw();
     SDL_Delay(16);
   }

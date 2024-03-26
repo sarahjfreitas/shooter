@@ -22,3 +22,11 @@ void Sprite::draw(SDL_Renderer* renderer)
   SDL_QueryTexture(texture, nullptr, nullptr, nullptr, nullptr);
   SDL_RenderCopy(renderer, texture, &src, &dest);
 }
+
+
+// private
+
+bool Sprite::isOutOfBounds()
+{
+  return position.x < 0 || position.x + width > windowWidth || position.y < 0 || position.y + height > windowHeight;
+}

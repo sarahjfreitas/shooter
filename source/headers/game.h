@@ -24,6 +24,7 @@ class Game
     bool isRunning() { return running; };
     void handleEvents();
     void draw();
+    void update();
 
     Player player;
 
@@ -33,4 +34,6 @@ class Game
     bool running = true;
 
     void initSdl();
+    void handleKeyDownEvents(SDL_KeyboardEvent* event);
+    void handleKeyUpEvents(SDL_KeyboardEvent* event);
 };

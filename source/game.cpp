@@ -45,9 +45,26 @@ void Game::handleEvents()
     {
       running = false;
     }
+    switch (event.type)
+    {
+      case SDL_QUIT:
+        running = false;
+        break;
+      case SDL_KEYDOWN:
+        handleKeyDownEvents(&event.key);
+        break;
+      case SDL_KEYUP:
+        handleKeyUpEvents(&event.key);
+        break;
+
+    }
   }
 };
 
+void Game::update()
+{
+  player.move();
+};
 
 void Game::draw()
 {
@@ -56,3 +73,51 @@ void Game::draw()
   player.draw(renderer);  
   SDL_RenderPresent(renderer);
 };
+
+// private
+
+void Game::handleKeyDownEvents(SDL_KeyboardEvent *event)
+{
+  switch (event->keysym.scancode)
+  {
+    case SDL_SCANCODE_UP:
+    case SDL_SCANCODE_W:
+      player.moveUp = true;
+      break;
+    case SDL_SCANCODE_DOWN:
+    case SDL_SCANCODE_S:
+      player.moveDown = true;
+      break;
+    case SDL_SCANCODE_LEFT:
+    case SDL_SCANCODE_A:
+      player.moveLeft = true;
+      break;
+    case SDL_SCANCODE_RIGHT:
+    case SDL_SCANCODE_D:
+      player.moveRight = true;
+      break;
+  }
+}
+
+void Game::handleKeyUpEvents(SDL_KeyboardEvent* event)
+{
+  switch (event->keysym.scancode)
+  {
+  case SDL_SCANCODE_UP:
+  case SDL_SCANCODE_W:
+    player.moveUp = false;
+    break;
+  case SDL_SCANCODE_DOWN:
+  case SDL_SCANCODE_S:
+    player.moveDown = false;
+    break;
+  case SDL_SCANCODE_LEFT:
+  case SDL_SCANCODE_A:
+    player.moveLeft = false;
+    break;
+  case SDL_SCANCODE_RIGHT:
+  case SDL_SCANCODE_D:
+    player.moveRight = false;
+    break;
+  }
+}
