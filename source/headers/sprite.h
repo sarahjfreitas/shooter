@@ -7,19 +7,36 @@
 
 using std::string;
 
+enum class Direction {
+  Up,
+  Down,
+  Left,
+  Right,
+  UpLeft,
+  UpRight,
+  DownLeft,
+  DownRight,
+};
+
 class Sprite
 {
   public:
-    void draw(SDL_Renderer* renderer);
-    void update();
+    void virtual draw(SDL_Renderer* renderer);
+    void virtual update() {};
+    void loadTexture(SDL_Renderer* renderer);
+    Direction direction = Direction::Right;
+    SDL_Point position;
   
   protected:
-    Sprite(int x, int y, string imagePath, int w, int h);
+    Sprite(int x, int y, string imagePath, int width, int height, int speed);
     
     string imagePath;
-    SDL_Point position;
     int width;
     int height;
+    int speed;
+    SDL_Texture* texture = nullptr;
 
     bool isOutOfBounds();
+    void move();
+    void draw_(SDL_Renderer* renderer, int xSource, int ySource);
 };

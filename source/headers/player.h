@@ -1,6 +1,7 @@
 #pragma once
 
 #include "sprite.h"
+#include "bullet.h"
 
 class Player : public Sprite
 {
@@ -10,8 +11,12 @@ class Player : public Sprite
     bool moveDown = false;
     bool moveLeft = false;
     bool moveRight = false;
-    int speed = 10;
-    void move();
+    Bullet bullet;
+
+    void update() override;
+    void draw(SDL_Renderer* renderer) override;
+    void shoot();
   
   private:
+    bool isMoving();
 };

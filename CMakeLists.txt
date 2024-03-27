@@ -26,6 +26,7 @@ add_executable(shooter
   ${SOURCE_DIR}/game.cpp
   ${SOURCE_DIR}/sprite.cpp
   ${SOURCE_DIR}/player.cpp
+  ${SOURCE_DIR}/bullet.cpp
 )
 
 target_link_libraries(shooter PRIVATE SDL2::SDL2 SDL2::SDL2main)

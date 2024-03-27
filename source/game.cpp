@@ -4,6 +4,8 @@
 Game::Game()
 {
   initSdl();
+  player.loadTexture(renderer);
+  player.bullet.loadTexture(renderer);
 };
 
 Game::~Game()
@@ -63,14 +65,16 @@ void Game::handleEvents()
 
 void Game::update()
 {
-  player.move();
+  player.update();
+  player.bullet.update();
 };
 
 void Game::draw()
 {
   SDL_RenderClear(renderer);
   SDL_SetRenderDrawColor(renderer, 96, 128, 255, 255);
-  player.draw(renderer);  
+  player.draw(renderer);
+  player.bullet.draw(renderer);  
   SDL_RenderPresent(renderer);
 };
 
@@ -95,6 +99,9 @@ void Game::handleKeyDownEvents(SDL_KeyboardEvent *event)
     case SDL_SCANCODE_RIGHT:
     case SDL_SCANCODE_D:
       player.moveRight = true;
+      break;
+    case SDL_SCANCODE_SPACE:
+      player.shoot();
       break;
   }
 }
