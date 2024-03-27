@@ -11,10 +11,11 @@ int main(int argc, char* argv[])
 
   while (game.isRunning())
   {
+    Uint32 frameStart = SDL_GetTicks();
     game.handleEvents();
     game.update();
     game.draw();
-    SDL_Delay(16);
+    game.limitFps(frameStart);
   }
 
   return 0;

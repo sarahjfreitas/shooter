@@ -58,7 +58,6 @@ void Game::handleEvents()
       case SDL_KEYUP:
         handleKeyUpEvents(&event.key);
         break;
-
     }
   }
 };
@@ -67,7 +66,16 @@ void Game::update()
 {
   player.update();
   player.bullet.update();
-};
+}
+
+void Game::limitFps(Uint32 frameStart)
+{
+  Uint32 frameDuration = SDL_GetTicks() - frameStart;
+  if (frameDuration <= frameDelay)
+  {
+    SDL_Delay(frameDelay - frameDuration);
+  }
+}
 
 void Game::draw()
 {

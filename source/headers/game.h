@@ -25,6 +25,7 @@ class Game
     void handleEvents();
     void draw();
     void update();
+    void limitFps(Uint32 frameStart);
 
     Player player;
 
