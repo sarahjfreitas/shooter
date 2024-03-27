@@ -1,19 +1,16 @@
 #include "bullet.h"
 
-void Bullet::draw(SDL_Renderer* renderer)
-{
-  if(isFiring)
-  {
-    Sprite::draw(renderer);
-  }
-}
-
 void Bullet::update()
 {
   move();
+}
 
-  if (isOutOfBounds())
-  {
-    isFiring = false;
-  }
+void Bullet::loadTexture(SDL_Renderer* renderer)
+{
+  texture = loadTexture_(renderer, "assets/bullet.png");
+}
+
+void Bullet::draw(SDL_Renderer* renderer)
+{
+  draw_(renderer, texture, 0, 0);
 }

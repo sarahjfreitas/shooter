@@ -21,22 +21,21 @@ enum class Direction {
 class Sprite
 {
   public:
-    void virtual draw(SDL_Renderer* renderer);
+    void virtual draw(SDL_Renderer* renderer) {};
     void virtual update() {};
-    void loadTexture(SDL_Renderer* renderer);
     Direction direction = Direction::Right;
     SDL_Point position;
   
   protected:
-    Sprite(int x, int y, string imagePath, int width, int height, int speed);
+    Sprite(int x, int y, int width, int height, int speed);
     
-    string imagePath;
     int width;
     int height;
     int speed;
-    SDL_Texture* texture = nullptr;
+    static inline SDL_Texture* texture = nullptr;
 
     bool isOutOfBounds();
     void move();
-    void draw_(SDL_Renderer* renderer, int xSource, int ySource);
+    void draw_(SDL_Renderer* renderer, SDL_Texture* texture, int xSource, int ySource);
+    static SDL_Texture* loadTexture_(SDL_Renderer* renderer, string imagePath);
 };

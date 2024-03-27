@@ -6,8 +6,12 @@
 #include <stdexcept>
 #include <iostream>
 #include <string>
+#include <vector>
+#include <algorithm>
+
 #include <SDL.h>
 #include <SDL_image.h>
+
 
 #include "config.h"
 #include "sprite.h"  
@@ -15,6 +19,7 @@
 
 using std::runtime_error;
 using std::string;
+using std::vector;
 
 class Game
 {
@@ -28,6 +33,7 @@ class Game
     void limitFps(Uint32 frameStart);
 
     Player player;
+    vector<Bullet> bullets;
 
   private:
     SDL_Window *window;

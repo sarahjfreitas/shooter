@@ -1,30 +1,26 @@
 #include "sprite.h"
 #include <iostream>
 
-Sprite::Sprite(int x, int y, string image, int width, int height, int speed)
+Sprite::Sprite(int x, int y, int width, int height, int speed)
 {
   position = {x, y};
-  imagePath = image;
   this->width = width;
   this->height = height;
   this->speed = speed;
 }
 
-void Sprite::loadTexture(SDL_Renderer* renderer)
+SDL_Texture* Sprite::loadTexture_(SDL_Renderer* renderer, string imagePath)
 {
-  texture = IMG_LoadTexture(renderer, imagePath.c_str());
+  SDL_Texture* texture = IMG_LoadTexture(renderer, imagePath.c_str());
   if (texture == nullptr)
   {
     std::cout << "Failed to load texture: " << imagePath << std::endl;
   }
+
+  return texture;
 }
 
-void Sprite::draw(SDL_Renderer* renderer)
-{
-  draw_(renderer, 0, 0);
-}
-
-void Sprite::draw_(SDL_Renderer* renderer, int xSource, int ySource)
+void Sprite::draw_(SDL_Renderer* renderer, SDL_Texture* texture, int xSource, int ySource)
 {
   if (texture == nullptr)
   {
@@ -37,7 +33,6 @@ void Sprite::draw_(SDL_Renderer* renderer, int xSource, int ySource)
   SDL_RenderCopy(renderer, texture, &src, &dest);
 }
 
-// protected
 bool Sprite::isOutOfBounds()
 {
   return position.x < 0 || position.x + width > windowWidth || position.y < 0 || position.y + height > windowHeight;

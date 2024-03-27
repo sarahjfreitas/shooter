@@ -2,6 +2,7 @@
 
 #include "sprite.h"
 #include "bullet.h"
+#include <SDL.h>
 
 class Player : public Sprite
 {
@@ -11,12 +12,13 @@ class Player : public Sprite
     bool moveDown = false;
     bool moveLeft = false;
     bool moveRight = false;
-    Bullet bullet;
 
     void update() override;
     void draw(SDL_Renderer* renderer) override;
-    void shoot();
+    Bullet shoot();
+    void static loadTexture(SDL_Renderer* renderer);
   
   private:
     bool isMoving();
+    static inline SDL_Texture* texture = nullptr;
 };
