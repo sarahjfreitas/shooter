@@ -15,3 +15,4 @@ Here is a comprensive list:
 
 - Spaceship, by Killy Overdrive https://opengameart.org/content/spaceship-360
 - Fire Bullet, by joemaya https://opengameart.org/content/pixel-bullet
+- https://opengameart.org/content/space-shooter-redux

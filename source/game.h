@@ -6,20 +6,15 @@
 #include <stdexcept>
 #include <iostream>
 #include <string>
-#include <vector>
-#include <algorithm>
-
-#include <SDL.h>
-#include <SDL_image.h>
-
 
 #include "config.h"
-#include "sprite.h"  
-#include "player.h"
+#include "scenes/scene_handler.h"
+#include "scenes/scene_id.h"
 
 using std::runtime_error;
 using std::string;
-using std::vector;
+using SpaceShooter::Scenes::SceneHandler;
+using SpaceShooter::Scenes::SceneId;
 
 class Game
 {
@@ -32,15 +27,14 @@ class Game
     void update();
     void limitFps(Uint32 frameStart);
 
-    Player player;
-    vector<Bullet> bullets;
-
   private:
     SDL_Window *window;
     SDL_Renderer *renderer;
     bool running = true;
+    SceneHandler sceneHandler;
 
     void initSdl();
+    void initScenes();
     void handleKeyDownEvents(SDL_KeyboardEvent* event);
     void handleKeyUpEvents(SDL_KeyboardEvent* event);
 };

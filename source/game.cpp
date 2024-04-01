@@ -4,8 +4,7 @@
 Game::Game()
 {
   initSdl();
-  Player::loadTexture(renderer);
-  Bullet::loadTexture(renderer);
+  initScenes();
 };
 
 Game::~Game()
@@ -15,7 +14,17 @@ Game::~Game()
   SDL_Quit();
 };
 
+void Game::update()
+{
+  SceneHandler.getCurrentScene()->update();
+}
+void Game::draw()
+{
+  sceneHandler.getCurrentScene()->draw();
+};
+
 //private
+
 void Game::initSdl()
 {
   if (SDL_Init(SDL_INIT_VIDEO) < 0)
@@ -38,37 +47,9 @@ void Game::initSdl()
   IMG_Init(IMG_INIT_PNG | IMG_INIT_JPG);
 };
 
-void Game::handleEvents()
+void Game::initScenes()
 {
-  SDL_Event event;
-  while (SDL_PollEvent(&event))
-  {
-    if (event.type == SDL_QUIT)
-    {
-      running = false;
-    }
-    switch (event.type)
-    {
-      case SDL_QUIT:
-        running = false;
-        break;
-      case SDL_KEYDOWN:
-        handleKeyDownEvents(&event.key);
-        break;
-      case SDL_KEYUP:
-        handleKeyUpEvents(&event.key);
-        break;
-    }
-  }
-};
-
-void Game::update()
-{
-  player.update();
-  for (auto& bullet : bullets)
-  {
-    bullet.update();
-  }
+  sceneHandler.addScene(SceneId::game);
 }
 
 void Game::limitFps(Uint32 frameStart)
@@ -79,20 +60,6 @@ void Game::limitFps(Uint32 frameStart)
     SDL_Delay(frameDelay - frameDuration);
   }
 }
-
-void Game::draw()
-{
-  SDL_RenderClear(renderer);
-  SDL_SetRenderDrawColor(renderer, 96, 128, 255, 255);
-  player.draw(renderer);
-  for (auto& bullet : bullets)
-  {
-    bullet.draw(renderer);
-  }
-  SDL_RenderPresent(renderer);
-};
-
-// private
 
 void Game::handleKeyDownEvents(SDL_KeyboardEvent *event)
 {
