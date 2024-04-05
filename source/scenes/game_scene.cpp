@@ -4,7 +4,7 @@ namespace SpaceShooter::Scenes
 {
   GameScene::GameScene()
   {
-    spriteSheet = make_shared<TextureModel>();
+    spriteSheet = make_shared<Texture>();
     spriteSheet->load("assets/sprites/sheet.png");
 
     player = make_unique<Player>(spriteSheet);

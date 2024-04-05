@@ -4,7 +4,6 @@
 #include <memory>
 
 #include "graphics/texture.h"
-#include "graphics/texture_model.h"
 
 using std::unique_ptr;
 using std::make_unique;
@@ -16,15 +15,15 @@ namespace SpaceShooter::GameObjects {
   class Player
   {
     public:
-      Player(shared_ptr<TextureModel> spriteSheet);
+      Player(shared_ptr<Texture> spriteSheet) : texture(spriteSheet) {}
 
       void update();
       void draw();
 
     private:
-      unique_ptr<Texture> texture;
-      double rotation = 0; // maybe move to texture?
+      shared_ptr<Texture> texture;
       SDL_Point position = { 300, 300 };
+      double rotation = 0;
 
       // TODO: maybe change it latter to allow the user to choose different ships
       SDL_Point spriteSheetPosition = { 224, 832 };

@@ -9,6 +9,7 @@ using std::make_shared;
 using std::make_unique;
 
 #include "config.h"
+#include "graphics/texture.h"
 #include "scenes/scene.h"
 #include "game_objects/player.h"
 
@@ -27,7 +28,7 @@ namespace SpaceShooter::Scenes
     private:
       void handleKeyDownEvents(SDL_KeyboardEvent* event);
       void handleKeyUpEvents(SDL_KeyboardEvent* event);
-      shared_ptr<TextureModel> spriteSheet = nullptr;
+      shared_ptr<Texture> spriteSheet = nullptr;
       unique_ptr<Player> player = nullptr;
   };
 }

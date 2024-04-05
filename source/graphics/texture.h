@@ -2,27 +2,23 @@
 
 #include <string>
 #include <SDL.h>
+#include <SDL_image.h>
 #include <memory>
 
-#include "texture_model.h"
 #include "config.h"
 
 using std::shared_ptr;
-using SpaceShooter::Graphics::TextureModel;
 
 namespace SpaceShooter::Graphics 
 {
   class Texture
   {
     public:
-      Texture(shared_ptr<TextureModel> textureModel);
-
-      void setSourcePosition(SDL_Point _sourcePosition) { sourcePosition.x = _sourcePosition.x; sourcePosition.y = _sourcePosition.y; }
-      void setSize(int w, int h) { widht = w; height = h; };
-      void draw(const SDL_Point& renderPosition);
+      void load(const char* filename);
+      void draw(const SDL_Point& renderPosition, const SDL_Point& sourcePosition, int widht, int height);
 
     private:
-      shared_ptr<TextureModel> textureModel;
+      SDL_Texture* texture;
       SDL_Point sourcePosition = {0,0};
       int widht = 0;
       int height = 0;

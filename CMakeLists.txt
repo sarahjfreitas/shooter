@@ -19,7 +19,6 @@ add_executable(shooter
   ${SOURCE_DIR}/main.cpp
   ${SOURCE_DIR}/game.cpp
   ${SOURCE_DIR}/game_objects/player.cpp
-  ${SOURCE_DIR}/graphics/texture_model.cpp
   ${SOURCE_DIR}/graphics/texture.cpp
   ${SOURCE_DIR}/scenes/scene_handler.cpp
   ${SOURCE_DIR}/scenes/game_scene.cpp
