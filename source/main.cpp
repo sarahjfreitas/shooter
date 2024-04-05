@@ -1,4 +1,5 @@
 ﻿#include <iostream>
+#include <SDL.h>
 
 using std::cout;
 using std::endl;
@@ -7,12 +8,10 @@ using std::endl;
 
 int main(int argc, char* argv[])
 {
-	Game game;
-
+  Game game;
   while (game.isRunning())
   {
     Uint32 frameStart = SDL_GetTicks();
-    game.handleEvents();
     game.update();
     game.draw();
     game.limitFps(frameStart);

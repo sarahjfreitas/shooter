@@ -4,7 +4,8 @@
 #include <memory>
 
 using std::unordered_map;
-using std::unique_ptr;
+using std::shared_ptr;
+using std::make_shared;
 using std::make_pair;
 
 #include "scene.h"
@@ -17,16 +18,17 @@ namespace SpaceShooter::Scenes
   {
     public:
       void update();
+      bool handleEvents();
       void draw();
       void switchTo(SceneId sceneId);
       void addScene(SceneId sceneId);
-      unique_ptr<Scene> const getCurrentScene();
+      shared_ptr<Scene> const getCurrentScene();
 
     private:
-      unordered_map<SceneId, unique_ptr<Scene>> scenes; 
+      unordered_map<SceneId, shared_ptr<Scene>> scenes;
 	    SceneId currentSceneId;
 
       bool sceneExists(SceneId sceneId);
-      Scene createScene(SceneId sceneId);
+      shared_ptr<Scene> createScene(SceneId sceneId);
   };
 }

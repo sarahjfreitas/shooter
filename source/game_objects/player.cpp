@@ -1,9 +1,9 @@
 #include "player.h"
 
-Player::Player(TextureModel spriteSheet)
+Player::Player(shared_ptr<TextureModel> spriteSheet)
 {
-  texture = new Texture(spriteSheet);
-  texture.setSourcePosition(spriteSheetPosition.x, spriteSheetPosition.y);
+  texture = make_unique<Texture>(spriteSheet);
+  texture->setSourcePosition(spriteSheetPosition.x, spriteSheetPosition.y);
 }
 
 void Player::update()
@@ -13,7 +13,7 @@ void Player::update()
   // should I change the image on rotation or just rotate the texture?
 }
 
-void Player::draw(SDL_Renderer* renderer)
+void Player::draw()
 {
-  texture.draw(renderer, position);
+  texture->draw(position);
 }

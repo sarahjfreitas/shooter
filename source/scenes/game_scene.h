@@ -1,6 +1,9 @@
 #pragma once
 
-#include <scene.h>
+#include <SDL.h>
+#include "config.h"
+#include "scenes/scene.h"
+#include "game_objects/player.h"
 
 namespace SpaceShooter::Scenes
 {
@@ -9,8 +12,10 @@ namespace SpaceShooter::Scenes
     public:
       void update() override;
       void draw() override;
+      bool handleEvents();
 
     private:
-      void handleEvents();
+      void handleKeyDownEvents(SDL_KeyboardEvent* event);
+      void handleKeyUpEvents(SDL_KeyboardEvent* event);
   };
 }

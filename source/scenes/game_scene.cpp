@@ -4,7 +4,6 @@ namespace SpaceShooter::Scenes
 {
   void GameScene::update()
   {
-    handleEvents();
     // updates player and enemies
     // check for collisions
     // spawn new enemies
@@ -21,20 +20,15 @@ namespace SpaceShooter::Scenes
 
   // private
 
-  void GameScene::handleEvents()
+  bool GameScene::handleEvents()
   {
     SDL_Event event;
     while (SDL_PollEvent(&event))
     {
-      if (event.type == SDL_QUIT)
-      {
-        running = false;
-      }
       switch (event.type)
       {
         case SDL_QUIT:
-          running = false;
-          break;
+          return false;
         case SDL_KEYDOWN:
           handleKeyDownEvents(&event.key);
           break;
@@ -43,6 +37,48 @@ namespace SpaceShooter::Scenes
           break;
       }
     }
+
+    return true;
   };
+  
+  void GameScene::handleKeyDownEvents(SDL_KeyboardEvent* event)
+  {
+    switch (event->keysym.scancode)
+    {
+    case SDL_SCANCODE_UP:
+    case SDL_SCANCODE_W:
+      break;
+    case SDL_SCANCODE_DOWN:
+    case SDL_SCANCODE_S:
+      break;
+    case SDL_SCANCODE_LEFT:
+    case SDL_SCANCODE_A:
+      break;
+    case SDL_SCANCODE_RIGHT:
+    case SDL_SCANCODE_D:
+      break;
+    case SDL_SCANCODE_SPACE:
+      break;
+    }
+  }
+
+  void GameScene::handleKeyUpEvents(SDL_KeyboardEvent* event)
+  {
+    switch (event->keysym.scancode)
+    {
+    case SDL_SCANCODE_UP:
+    case SDL_SCANCODE_W:
+      break;
+    case SDL_SCANCODE_DOWN:
+    case SDL_SCANCODE_S:
+      break;
+    case SDL_SCANCODE_LEFT:
+    case SDL_SCANCODE_A:
+      break;
+    case SDL_SCANCODE_RIGHT:
+    case SDL_SCANCODE_D:
+      break;
+    }
+  }
 
 }

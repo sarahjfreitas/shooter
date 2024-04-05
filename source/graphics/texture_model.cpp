@@ -1,4 +1,5 @@
 #include "texture_model.h"
+#include "config.h"
 
 namespace SpaceShooter::Graphics
 {
@@ -7,9 +8,9 @@ namespace SpaceShooter::Graphics
     SDL_DestroyTexture(texture);
   }
 
-  void TextureModel::load(const char* filename, int weight, int height, SDL_Renderer* renderer) const
+  void TextureModel::load(const char* filename, int widht, int height)
   {
-    this->weight = weight;
+    this->widht = widht;
     this->height = height;
     texture = IMG_LoadTexture(renderer, filename);
   }

@@ -1,10 +1,12 @@
 #include "game.h"
 
-//public
+SDL_Renderer* renderer = nullptr; // Define renderer
+
 Game::Game()
 {
   initSdl();
   initScenes();
+  running = true;
 };
 
 Game::~Game()
@@ -16,8 +18,13 @@ Game::~Game()
 
 void Game::update()
 {
-  SceneHandler.getCurrentScene()->update();
+  auto handled = sceneHandler.getCurrentScene()->handleEvents();
+  if(!handled){
+    running = false;
+  }
+  sceneHandler.getCurrentScene()->update();
 }
+
 void Game::draw()
 {
   sceneHandler.getCurrentScene()->draw();
@@ -49,7 +56,8 @@ void Game::initSdl()
 
 void Game::initScenes()
 {
-  sceneHandler.addScene(SceneId::game);
+  sceneHandler.addScene(SpaceShooter::Scenes::SceneId::game);
+  sceneHandler.switchTo(SpaceShooter::Scenes::SceneId::game);
 }
 
 void Game::limitFps(Uint32 frameStart)
@@ -58,54 +66,5 @@ void Game::limitFps(Uint32 frameStart)
   if (frameDuration <= frameDelay)
   {
     SDL_Delay(frameDelay - frameDuration);
-  }
-}
-
-void Game::handleKeyDownEvents(SDL_KeyboardEvent *event)
-{
-  switch (event->keysym.scancode)
-  {
-    case SDL_SCANCODE_UP:
-    case SDL_SCANCODE_W:
-      player.moveUp = true;
-      break;
-    case SDL_SCANCODE_DOWN:
-    case SDL_SCANCODE_S:
-      player.moveDown = true;
-      break;
-    case SDL_SCANCODE_LEFT:
-    case SDL_SCANCODE_A:
-      player.moveLeft = true;
-      break;
-    case SDL_SCANCODE_RIGHT:
-    case SDL_SCANCODE_D:
-      player.moveRight = true;
-      break;
-    case SDL_SCANCODE_SPACE:
-      bullets.push_back(player.shoot());
-      break;
-  }
-}
-
-void Game::handleKeyUpEvents(SDL_KeyboardEvent* event)
-{
-  switch (event->keysym.scancode)
-  {
-  case SDL_SCANCODE_UP:
-  case SDL_SCANCODE_W:
-    player.moveUp = false;
-    break;
-  case SDL_SCANCODE_DOWN:
-  case SDL_SCANCODE_S:
-    player.moveDown = false;
-    break;
-  case SDL_SCANCODE_LEFT:
-  case SDL_SCANCODE_A:
-    player.moveLeft = false;
-    break;
-  case SDL_SCANCODE_RIGHT:
-  case SDL_SCANCODE_D:
-    player.moveRight = false;
-    break;
   }
 }

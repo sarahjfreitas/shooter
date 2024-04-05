@@ -7,6 +7,11 @@ namespace SpaceShooter::Scenes
     getCurrentScene()->update();
   }
 
+  bool SceneHandler::handleEvents()
+  {
+    return getCurrentScene()->handleEvents();
+  }
+
   void SceneHandler::draw()
   {
     getCurrentScene()->draw();
@@ -23,10 +28,10 @@ namespace SpaceShooter::Scenes
   {
     if(sceneExists(sceneId)) return;
 
-    scenes.insert(make_pair(sceneId, createScene())); 
+    scenes.insert(make_pair(sceneId, createScene(sceneId))); 
   }
 
-  unique_ptr<Scene> SceneHandler::getCurrentScene()
+  shared_ptr<Scene> const SceneHandler::getCurrentScene()
   {
     return scenes.at(currentSceneId);
   }
@@ -38,16 +43,16 @@ namespace SpaceShooter::Scenes
     return scenes.find(sceneId) != scenes.end();
   }
 
-  Scene SceneHandler::createScene(SceneId sceneId)
+  shared_ptr<Scene> SceneHandler::createScene(SceneId sceneId)
   {
     //TODO: change to factory
     switch (sceneId)
     {
-      case SceneId::mainMenu:
+      //case SceneId::mainMenu:
         //return new MainMenuScene();
       case SceneId::game:
-        return new GameScene();
-      case SceneId::gameOver:
+        return make_shared<GameScene>();
+      //case SceneId::gameOver:
         //return new GameOverScene();
     }
   }

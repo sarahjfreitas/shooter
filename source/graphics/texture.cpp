@@ -2,16 +2,16 @@
 
 namespace SpaceShooter::Graphics
 {
-  Texture::Texture(unique_ptr<TextureModel> textureModel)
+  Texture::Texture(shared_ptr<TextureModel> textureModel)
   {
-    _textureModel = textureModel;
+    this->textureModel = textureModel;
   }
 
-  void Texture::draw(SDL_Renderer* renderer, const SDL_Point& renderPosition)
+  void Texture::draw(const SDL_Point& renderPosition)
   {
-    SDL_Rect destination = {renderPosition.x, renderPosition.y, _textureModel.weight, _textureModel.height};
-    SDL_Rect source = {sourcePosition.x, sourcePosition.y, _textureModel.weight, _textureModel.height}
-    SDL_QueryTexture(_textureModel.texture, NULL, NULL, &destination.w, &destination.h);
-    SDL_RenderCopy(renderer, _textureModel.texture, &source, &destination);
+    SDL_Rect destination = {renderPosition.x, renderPosition.y, textureModel->widht, textureModel->height};
+    SDL_Rect source = { sourcePosition.x, sourcePosition.y, textureModel->widht, textureModel->height };
+    SDL_QueryTexture(textureModel->texture, NULL, NULL, &destination.w, &destination.h);
+    SDL_RenderCopy(renderer, textureModel->texture, &source, &destination);
   }
 }

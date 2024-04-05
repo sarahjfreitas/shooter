@@ -4,20 +4,24 @@
 #include <SDL.h>
 #include <memory>
 
-using std::unique_ptr;
+#include "texture_model.h"
+#include "config.h"
+
+using std::shared_ptr;
+using SpaceShooter::Graphics::TextureModel;
 
 namespace SpaceShooter::Graphics 
 {
   class Texture
   {
     public:
-      Texture(unique_ptr<TextureModel> textureModel)
+      Texture(shared_ptr<TextureModel> textureModel);
 
       void setSourcePosition(int x, int y) { sourcePosition.x = x; sourcePosition.y = y; }
-      void draw(SDL_Renderer* renderer, const SDL_Point& renderPosition);
+      void draw(const SDL_Point& renderPosition);
 
     private:
-      unique_ptr<TextureModel> _textureModel;
+      shared_ptr<TextureModel> textureModel;
       SDL_Point sourcePosition = {0,0}; 
   };
 }
