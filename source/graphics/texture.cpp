@@ -9,9 +9,9 @@ namespace SpaceShooter::Graphics
 
   void Texture::draw(const SDL_Point& renderPosition)
   {
-    SDL_Rect destination = {renderPosition.x, renderPosition.y, textureModel->widht, textureModel->height};
-    SDL_Rect source = { sourcePosition.x, sourcePosition.y, textureModel->widht, textureModel->height };
-    SDL_QueryTexture(textureModel->texture, NULL, NULL, &destination.w, &destination.h);
+    SDL_Rect destination = {renderPosition.x, renderPosition.y, widht, height};
+    SDL_Rect source = { sourcePosition.x, sourcePosition.y, widht, height };
+    SDL_QueryTexture(textureModel->texture, NULL, NULL, &widht, &height);
     SDL_RenderCopy(renderer, textureModel->texture, &source, &destination);
   }
 }

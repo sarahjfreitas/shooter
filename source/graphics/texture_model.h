@@ -10,8 +10,6 @@ namespace SpaceShooter::Graphics
     public:
       ~TextureModel();
       SDL_Texture* texture;
-      int widht;
-      int height;
-      void load(const char* filename, int widht, int height);
+      void load(const char* filename);
   };
 }

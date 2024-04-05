@@ -8,10 +8,8 @@ namespace SpaceShooter::Graphics
     SDL_DestroyTexture(texture);
   }
 
-  void TextureModel::load(const char* filename, int widht, int height)
+  void TextureModel::load(const char* filename)
   {
-    this->widht = widht;
-    this->height = height;
     texture = IMG_LoadTexture(renderer, filename);
   }
 }

@@ -2,8 +2,17 @@
 
 namespace SpaceShooter::Scenes
 {
+  GameScene::GameScene()
+  {
+    spriteSheet = make_shared<TextureModel>();
+    spriteSheet->load("assets/sprites/sheet.png");
+
+    player = make_unique<Player>(spriteSheet);
+  }
+
   void GameScene::update()
   {
+    player->update();
     // updates player and enemies
     // check for collisions
     // spawn new enemies
@@ -12,9 +21,7 @@ namespace SpaceShooter::Scenes
   void GameScene::draw()
   {
     SDL_RenderClear(renderer);
-    
-    // draw players and enemies
-
+    player->draw();
     SDL_RenderPresent(renderer);
   }
 

@@ -17,11 +17,14 @@ namespace SpaceShooter::Graphics
     public:
       Texture(shared_ptr<TextureModel> textureModel);
 
-      void setSourcePosition(int x, int y) { sourcePosition.x = x; sourcePosition.y = y; }
+      void setSourcePosition(SDL_Point _sourcePosition) { sourcePosition.x = _sourcePosition.x; sourcePosition.y = _sourcePosition.y; }
+      void setSize(int w, int h) { widht = w; height = h; };
       void draw(const SDL_Point& renderPosition);
 
     private:
       shared_ptr<TextureModel> textureModel;
-      SDL_Point sourcePosition = {0,0}; 
+      SDL_Point sourcePosition = {0,0};
+      int widht = 0;
+      int height = 0;
   };
 }

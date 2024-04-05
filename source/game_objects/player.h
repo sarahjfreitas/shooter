@@ -12,17 +12,23 @@ using std::shared_ptr;
 
 using namespace SpaceShooter::Graphics;
 
-class Player
-{
-  public:
-    Player(shared_ptr<TextureModel> spriteSheet);
+namespace SpaceShooter::GameObjects {
+  class Player
+  {
+    public:
+      Player(shared_ptr<TextureModel> spriteSheet);
 
-    void update();
-    void draw();
-  
-  private:
-    unique_ptr<Texture> texture;
-    double rotation = 0; // maybe move to texture?
-    SDL_Point position = {0, 0};
-    SDL_Point spriteSheetPosition = {0, 0}; //TODO: check where the player ship is on the sprite sheet 
-};
+      void update();
+      void draw();
+
+    private:
+      unique_ptr<Texture> texture;
+      double rotation = 0; // maybe move to texture?
+      SDL_Point position = { 300, 300 };
+
+      // TODO: maybe change it latter to allow the user to choose different ships
+      SDL_Point spriteSheetPosition = { 224, 832 };
+      int spriteWidth = 99;
+      int spriteHeight = 75;
+  };
+}
