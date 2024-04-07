@@ -18,10 +18,6 @@ Game::~Game()
 
 void Game::update()
 {
-  auto handled = sceneHandler.getCurrentScene()->handleEvents();
-  if(!handled){
-    running = false;
-  }
   sceneHandler.getCurrentScene()->update();
 }
 

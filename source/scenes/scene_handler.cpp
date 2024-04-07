@@ -7,11 +7,6 @@ namespace SpaceShooter::Scenes
     getCurrentScene()->update();
   }
 
-  bool SceneHandler::handleEvents()
-  {
-    return getCurrentScene()->handleEvents();
-  }
-
   void SceneHandler::draw()
   {
     getCurrentScene()->draw();
@@ -54,6 +49,8 @@ namespace SpaceShooter::Scenes
         return make_shared<GameScene>();
       //case SceneId::gameOver:
         //return new GameOverScene();
+      default:
+        return nullptr;
     }
   }
 }

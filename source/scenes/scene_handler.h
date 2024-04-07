@@ -18,7 +18,6 @@ namespace SpaceShooter::Scenes
   {
     public:
       void update();
-      bool handleEvents();
       void draw();
       void switchTo(SceneId sceneId);
       void addScene(SceneId sceneId);

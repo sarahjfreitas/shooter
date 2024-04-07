@@ -22,6 +22,7 @@ add_executable(shooter
   ${SOURCE_DIR}/graphics/texture.cpp
   ${SOURCE_DIR}/scenes/scene_handler.cpp
   ${SOURCE_DIR}/scenes/game_scene.cpp
+  ${SOURCE_DIR}/input/input_handler.cpp
 )
 
 # link external libs

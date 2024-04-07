@@ -7,11 +7,13 @@ namespace SpaceShooter::Scenes
     spriteSheet = make_shared<Texture>();
     spriteSheet->load("assets/sprites/sheet.png");
 
-    player = make_unique<Player>(spriteSheet);
+    player = make_shared<Player>(spriteSheet);
+    initializeInputHandler();
   }
 
   void GameScene::update()
   {
+    inputHandler.handleInput();
     player->update();
     // updates player and enemies
     // check for collisions
@@ -27,65 +29,26 @@ namespace SpaceShooter::Scenes
 
   // private
 
-  bool GameScene::handleEvents()
+  void GameScene::initializeInputHandler()
   {
-    SDL_Event event;
-    while (SDL_PollEvent(&event))
-    {
-      switch (event.type)
-      {
-        case SDL_QUIT:
-          return false;
-        case SDL_KEYDOWN:
-          handleKeyDownEvents(&event.key);
-          break;
-        case SDL_KEYUP:
-          handleKeyUpEvents(&event.key);
-          break;
-      }
-    }
+    // init input handler
+    auto attackCommand = make_unique<AttackCommand>();
+    auto speedUpCommand = make_unique<SpeedUpCommand>();
+    auto speedDownCommand = make_unique<SpeedDownCommand>();
+    auto turnRightCommand = make_unique<TurnRightCommand>();
+    auto turnLeftCommand = make_unique<TurnLeftCommand>();
 
-    return true;
-  };
-  
-  void GameScene::handleKeyDownEvents(SDL_KeyboardEvent* event)
-  {
-    switch (event->keysym.scancode)
-    {
-    case SDL_SCANCODE_UP:
-    case SDL_SCANCODE_W:
-      break;
-    case SDL_SCANCODE_DOWN:
-    case SDL_SCANCODE_S:
-      break;
-    case SDL_SCANCODE_LEFT:
-    case SDL_SCANCODE_A:
-      break;
-    case SDL_SCANCODE_RIGHT:
-    case SDL_SCANCODE_D:
-      break;
-    case SDL_SCANCODE_SPACE:
-      break;
-    }
+    attackCommand->setMovableGameObject(player);
+    speedUpCommand->setMovableGameObject(player);
+    speedDownCommand->setMovableGameObject(player);
+    turnRightCommand->setMovableGameObject(player);
+    turnLeftCommand->setMovableGameObject(player);
+
+    inputHandler.addObserver(InputType::Attack, move(attackCommand));
+    inputHandler.addObserver(InputType::SpeedUp, move(speedUpCommand));
+    inputHandler.addObserver(InputType::SpeedDown, move(speedDownCommand));
+    inputHandler.addObserver(InputType::TurnRight, move(turnRightCommand));
+    inputHandler.addObserver(InputType::TurnLeft, move(turnLeftCommand));
+
   }
-
-  void GameScene::handleKeyUpEvents(SDL_KeyboardEvent* event)
-  {
-    switch (event->keysym.scancode)
-    {
-    case SDL_SCANCODE_UP:
-    case SDL_SCANCODE_W:
-      break;
-    case SDL_SCANCODE_DOWN:
-    case SDL_SCANCODE_S:
-      break;
-    case SDL_SCANCODE_LEFT:
-    case SDL_SCANCODE_A:
-      break;
-    case SDL_SCANCODE_RIGHT:
-    case SDL_SCANCODE_D:
-      break;
-    }
-  }
-
 }
